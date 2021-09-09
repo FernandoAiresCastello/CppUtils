@@ -5,9 +5,11 @@
     <ClInclude Include="CppUtils\CppString.h" />
     <ClInclude Include="CppUtils\CppUtil.h" />
     <ClInclude Include="CppUtils.h" />
+    <ClInclude Include="CppUtils\CppMsgBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppUtils\CppString.cpp" />
     <ClCompile Include="CppUtils\CppUtil.cpp" />
+    <ClCompile Include="CppUtils\CppMsgBox.cpp" />
   </ItemGroup>
 </Project>

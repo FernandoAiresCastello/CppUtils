@@ -20,6 +20,7 @@
 #include <tchar.h>
 #include <sys/stat.h>
 #include "CppUtil.h"
+#include "CppMsgBox.h"
 
 namespace CppUtils
 {
@@ -123,15 +124,9 @@ namespace CppUtils
 		return value * percentage / 100;
 	}
 
-	void Util::Error(std::string message)
-	{
-		MessageBoxA(nullptr, message.c_str(), "Error",
-			MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_SETFOREGROUND);
-	}
-
 	void Util::Abort(std::string message)
 	{
-		Error(message);
+		MsgBox::Error(message);
 		exit(EXIT_FAILURE);
 	}
 

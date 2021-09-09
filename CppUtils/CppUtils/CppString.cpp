@@ -62,37 +62,25 @@ namespace CppUtils
 
 	int String::ToInt(std::string str)
 	{
-		if (str[0] == '0' && str[1] == 'x') {
-			int value = 0;
+		int value = 0;
+
+		bool sign = str[0] == '-';
+		if (sign)
+			str = String::Skip(str, 1);
+
+		if (str[0] == '0' && str[1] == 'x')
 			sscanf(str.c_str(), "%x", &value);
-			return value;
-		}
-		else if (str[0] == '0' && str[1] == 'b') {
-			return BinaryToInt(str);
-		}
+		else if (str[0] == '0' && str[1] == 'b')
+			value = stoi(String::Skip(str, 2), nullptr, 2);
+		else
+			value = atoi(str.c_str());
 
-		return atoi(str.c_str());
-	}
-
-	int String::HexToInt(std::string str)
-	{
-		if (str[0] == '0' && str[1] == 'x') {
-			return ToInt(str);
-		}
-		return ToInt("0x" + str);
+		return sign ? -value : value;
 	}
 
 	std::string String::IntToHex(int x, bool ucase)
 	{
 		return ucase ? Format("%X", x) : Format("%x", x);
-	}
-
-	unsigned int String::BinaryToInt(std::string str)
-	{
-		if (str[0] == '0' && str[1] == 'b') {
-			str = String::Skip(str, 2);
-		}
-		return std::stoi(str, nullptr, 2);
 	}
 
 	std::string String::IntToBinary(unsigned int x)

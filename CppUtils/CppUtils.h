@@ -8,4 +8,5 @@
 
 #include "CppUtils/CppGlobal.h"
 #include "CppUtils/CppUtil.h"
+#include "CppUtils/CppMsgBox.h"
 #include "CppUtils/CppString.h"

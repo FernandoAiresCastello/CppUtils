@@ -26,8 +26,6 @@ namespace CppUtils
 		
 		// === String-Number Conversion ===
 		static int ToInt(std::string str);
-		static int HexToInt(std::string str);
-		static unsigned int BinaryToInt(std::string str);
 		
 		// === Number-String Conversion ===
 		static std::string IntToHex(int x, bool ucase = false);

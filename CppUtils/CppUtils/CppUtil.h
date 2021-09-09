@@ -25,7 +25,6 @@ namespace CppUtils
 		static std::string RandomDigits(int length);
 		static bool RandomChance(int rate);
 		static int Percent(int value, int percentage);
-		static void Error(std::string message);
 		static void Abort(std::string message);
 		static void IntToBytes(uint val, byte bytes[4]);
 		static uint BytesToInt(byte bytes[4]);
