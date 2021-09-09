@@ -22,7 +22,7 @@ namespace CppUtils
 	void MsgBox::Warning(std::string title, std::string message)
 	{
 		MessageBoxA(nullptr, message.c_str(), title.c_str(),
-			MB_OK | MB_ICONINFORMATION | MB_TASKMODAL | MB_SETFOREGROUND);
+			MB_OK | MB_ICONWARNING | MB_TASKMODAL | MB_SETFOREGROUND);
 	}
 
 	void MsgBox::Error(std::string message)
@@ -33,6 +33,6 @@ namespace CppUtils
 	void MsgBox::Error(std::string title, std::string message)
 	{
 		MessageBoxA(nullptr, message.c_str(), title.c_str(),
-			MB_OK | MB_ICONINFORMATION | MB_TASKMODAL | MB_SETFOREGROUND);
+			MB_OK | MB_ICONERROR | MB_TASKMODAL | MB_SETFOREGROUND);
 	}
 }
