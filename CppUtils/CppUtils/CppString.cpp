@@ -178,12 +178,12 @@ namespace CppUtils
 		return !text.empty() && it == text.end();
 	}
 
-	std::string String::First(std::string text, int count)
+	std::string String::GetFirstChars(std::string text, int count)
 	{
 		return text.substr(0, count);
 	}
 
-	std::string String::Last(std::string text, int count)
+	std::string String::GetLastChars(std::string text, int count)
 	{
 		if (text.size() < (unsigned)count)
 			return text;
@@ -246,27 +246,27 @@ namespace CppUtils
 	int String::ShiftChar(int ch)
 	{
 		switch (ch) {
-		case '1': return '!';
-		case '2': return '@';
-		case '3': return '#';
-		case '4': return '$';
-		case '5': return '%';
-		case '6': return '^';
-		case '7': return '&';
-		case '8': return '*';
-		case '9': return '(';
-		case '0': return ')';
-		case '-': return '_';
-		case '=': return '+';
-		case '\'': return '"';
-		case '[': return '{';
-		case ']': return '}';
-		case '~': return '^';
-		case '\\': return '|';
-		case ',': return '<';
-		case '.': return '>';
-		case ';': return ':';
-		case '/': return '?';
+			case '1': return '!';
+			case '2': return '@';
+			case '3': return '#';
+			case '4': return '$';
+			case '5': return '%';
+			case '6': return '^';
+			case '7': return '&';
+			case '8': return '*';
+			case '9': return '(';
+			case '0': return ')';
+			case '-': return '_';
+			case '=': return '+';
+			case '\'': return '"';
+			case '[': return '{';
+			case ']': return '}';
+			case '~': return '^';
+			case '\\': return '|';
+			case ',': return '<';
+			case '.': return '>';
+			case ';': return ':';
+			case '/': return '?';
 		}
 		return ch;
 	}
@@ -304,6 +304,15 @@ namespace CppUtils
 		return str;
 	}
 
+	std::string String::Repeat(char ch, int times)
+	{
+		std::string str = "";
+		for (int i = 0; i < times; i++) {
+			str.push_back(ch);
+		}
+		return str;
+	}
+
 	std::string String::Repeat(std::string text, int times)
 	{
 		std::string str = "";
@@ -335,6 +344,19 @@ namespace CppUtils
 	{
 		int index = text.find_last_of(substring);
 		return index != std::string::npos ? index : -1;
+	}
+
+	std::vector<int> String::FindAll(std::string text, char ch)
+	{
+		std::vector<int> indexes;
+
+		for (int i = 0; i < text.length(); i++) {
+			if (text[i] == ch) {
+				indexes.push_back(i);
+			}
+		}
+
+		return indexes;
 	}
 
 	std::string String::Replace(std::string text, std::string search, std::string repl)
