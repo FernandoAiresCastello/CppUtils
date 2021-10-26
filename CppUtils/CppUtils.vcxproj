@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CppGlobal.h" />
+    <ClInclude Include="CppMsgBox.h" />
+    <ClInclude Include="CppString.h" />
+    <ClInclude Include="CppUtil.h" />
     <ClInclude Include="CppUtils.h" />
-    <ClInclude Include="CppUtils\CppGlobal.h" />
-    <ClInclude Include="CppUtils\CppMsgBox.h" />
-    <ClInclude Include="CppUtils\CppString.h" />
-    <ClInclude Include="CppUtils\CppUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CppUtils\CppMsgBox.cpp" />
-    <ClCompile Include="CppUtils\CppString.cpp" />
-    <ClCompile Include="CppUtils\CppUtil.cpp" />
+    <ClCompile Include="CppMsgBox.cpp" />
+    <ClCompile Include="CppString.cpp" />
+    <ClCompile Include="CppUtil.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

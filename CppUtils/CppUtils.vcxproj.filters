@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="CppUtils\CppGlobal.h" />
-    <ClInclude Include="CppUtils\CppString.h" />
-    <ClInclude Include="CppUtils\CppUtil.h" />
     <ClInclude Include="CppUtils.h" />
-    <ClInclude Include="CppUtils\CppMsgBox.h" />
+    <ClInclude Include="CppGlobal.h" />
+    <ClInclude Include="CppMsgBox.h" />
+    <ClInclude Include="CppString.h" />
+    <ClInclude Include="CppUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CppUtils\CppString.cpp" />
-    <ClCompile Include="CppUtils\CppUtil.cpp" />
-    <ClCompile Include="CppUtils\CppMsgBox.cpp" />
+    <ClCompile Include="CppMsgBox.cpp" />
+    <ClCompile Include="CppString.cpp" />
+    <ClCompile Include="CppUtil.cpp" />
   </ItemGroup>
 </Project>

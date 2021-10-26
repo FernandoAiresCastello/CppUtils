@@ -6,7 +6,7 @@
 =============================================================================*/
 #pragma once
 
-#include "CppUtils/CppGlobal.h"
-#include "CppUtils/CppUtil.h"
-#include "CppUtils/CppMsgBox.h"
-#include "CppUtils/CppString.h"
+#include "CppGlobal.h"
+#include "CppUtil.h"
+#include "CppMsgBox.h"
+#include "CppString.h"
