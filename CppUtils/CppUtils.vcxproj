@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CppFile.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CppGlobal.h" />
     <ClInclude Include="CppMsgBox.h" />
     <ClInclude Include="CppString.h" />
@@ -26,6 +30,10 @@
     <ClInclude Include="CppUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CppFile.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="CppMsgBox.cpp" />
     <ClCompile Include="CppString.cpp" />
     <ClCompile Include="CppUtil.cpp" />

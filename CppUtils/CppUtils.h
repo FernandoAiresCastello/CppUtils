@@ -10,3 +10,4 @@
 #include "CppUtil.h"
 #include "CppMsgBox.h"
 #include "CppString.h"
+#include "CppFile.h"

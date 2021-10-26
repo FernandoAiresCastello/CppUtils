@@ -6,10 +6,12 @@
     <ClInclude Include="CppMsgBox.h" />
     <ClInclude Include="CppString.h" />
     <ClInclude Include="CppUtil.h" />
+    <ClInclude Include="CppFile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppMsgBox.cpp" />
     <ClCompile Include="CppString.cpp" />
     <ClCompile Include="CppUtil.cpp" />
+    <ClCompile Include="CppFile.cpp" />
   </ItemGroup>
 </Project>
