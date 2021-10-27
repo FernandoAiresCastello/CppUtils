@@ -11,13 +11,13 @@
 
 namespace CppUtils
 {
-	class CppFile
+	class File
 	{
 	public:
 		enum Mode { ReadBinary, WriteBinary };
 
-		CppFile(std::string path, Mode mode);
-		~CppFile();
+		File(std::string path, Mode mode);
+		~File();
 
 		static const std::string CurrentDirectory;
 		static const std::string ParentDirectory;

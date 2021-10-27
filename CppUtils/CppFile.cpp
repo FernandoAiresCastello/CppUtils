@@ -13,18 +13,18 @@
 
 namespace CppUtils
 {
-	const std::string CppFile::CurrentDirectory = "./";
-	const std::string CppFile::ParentDirectory = "../";
+	const std::string File::CurrentDirectory = "./";
+	const std::string File::ParentDirectory = "../";
 
-	CppFile::CppFile(std::string path, Mode mode)
+	File::File(std::string path, Mode mode)
 	{
 		Fp = fopen(path.c_str(), mode == ReadBinary ? "rb" : "wb");
 		LengthRead = 0;
-		DataRead = mode == ReadBinary ? CppFile::ReadBytes(path, &LengthRead) : NULL;
+		DataRead = mode == ReadBinary ? File::ReadBytes(path, &LengthRead) : NULL;
 		ReadPtr = 0;
 	}
 
-	CppFile::~CppFile()
+	File::~File()
 	{
 		if (Fp) {
 			fflush(Fp);
@@ -32,7 +32,7 @@ namespace CppUtils
 		}
 	}
 
-	std::vector<std::string> CppFile::List(std::string directory, std::string pattern,
+	std::vector<std::string> File::List(std::string directory, std::string pattern,
 		bool showFolders, bool showHidden)
 	{
 		if (pattern.empty())
@@ -61,24 +61,24 @@ namespace CppUtils
 		return files;
 	}
 
-	bool CppFile::IsDirectory(std::string file)
+	bool File::IsDirectory(std::string file)
 	{
 		return String::EndsWith(file, "/");
 	}
 
-	bool CppFile::IsCurrentDirectory(std::string file)
+	bool File::IsCurrentDirectory(std::string file)
 	{
 		return file == "./";
 	}
 
-	bool CppFile::IsParentDirectory(std::string file)
+	bool File::IsParentDirectory(std::string file)
 	{
 		return file == "../";
 	}
 
-	bool CppFile::IsRoot(std::string directory)
+	bool File::IsRoot(std::string directory)
 	{
-		std::vector<std::string> files = CppFile::List(directory, "*", true);
+		std::vector<std::string> files = File::List(directory, "*", true);
 		for (unsigned i = 0; i < files.size(); i++) {
 			if (files[i] == "../")
 				return false;
@@ -86,25 +86,25 @@ namespace CppUtils
 		return true;
 	}
 
-	std::string CppFile::GetRoot()
+	std::string File::GetRoot()
 	{
 		return "C:/";
 	}
 
-	bool CppFile::Exists(std::string path)
+	bool File::Exists(std::string path)
 	{
 		struct stat buffer;
 		return (stat(path.c_str(), &buffer) == 0);
 	}
 
-	bool CppFile::ExistsFolder(std::string path)
+	bool File::ExistsFolder(std::string path)
 	{
 		struct stat buffer;
 		stat(path.c_str(), &buffer);
 		return (buffer.st_mode & S_IFDIR);
 	}
 
-	void CppFile::Create(std::string path)
+	void File::Create(std::string path)
 	{
 		unsigned pos = 0;
 		do {
@@ -120,41 +120,41 @@ namespace CppUtils
 		fs.close();
 	}
 
-	void CppFile::CreateFolder(std::string path)
+	void File::CreateFolder(std::string path)
 	{
 		CreateDirectory(path.c_str(), NULL);
 	}
 
-	void CppFile::Delete(std::string path)
+	void File::Delete(std::string path)
 	{
 		DeleteFile(path.c_str());
 	}
 
-	std::string CppFile::ReadText(std::string filename)
+	std::string File::ReadText(std::string filename)
 	{
 		int length = 0;
 		std::string text = std::string((const char*)ReadBytes(filename, &length), length);
 		return text;
 	}
 
-	std::vector<std::string> CppFile::ReadLines(std::string filename)
+	std::vector<std::string> File::ReadLines(std::string filename)
 	{
 		std::string file = String::Replace(ReadText(filename), "\r", "");
 		return String::Split(file, '\n', false);
 	}
 
-	std::vector<int> CppFile::ReadBytes(std::string filename)
+	std::vector<int> File::ReadBytes(std::string filename)
 	{
 		std::vector<int> bytes;
 		int length = -1;
-		unsigned char* data = CppFile::ReadBytes(filename, &length);
+		unsigned char* data = File::ReadBytes(filename, &length);
 		for (int i = 0; i < length; i++) {
 			bytes.push_back(data[i]);
 		}
 		return bytes;
 	}
 
-	unsigned char* CppFile::ReadBytes(std::string filename, int* length)
+	unsigned char* File::ReadBytes(std::string filename, int* length)
 	{
 		std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
 
@@ -171,7 +171,7 @@ namespace CppUtils
 		return NULL;
 	}
 
-	void CppFile::WriteText(std::string filename, std::string text)
+	void File::WriteText(std::string filename, std::string text)
 	{
 		std::ofstream ofs(filename);
 
@@ -183,7 +183,7 @@ namespace CppUtils
 		ofs.close();
 	}
 
-	void CppFile::WriteLines(std::string filename, std::vector<std::string> lines)
+	void File::WriteLines(std::string filename, std::vector<std::string> lines)
 	{
 		std::ofstream ofs(filename);
 
@@ -199,19 +199,19 @@ namespace CppUtils
 		ofs.close();
 	}
 
-	void CppFile::WriteBytes(std::string filename, std::vector<int>& bytes)
+	void File::WriteBytes(std::string filename, std::vector<int>& bytes)
 	{
-		CppFile file(filename, Mode::WriteBinary);
+		File file(filename, Mode::WriteBinary);
 		for (auto& byte : bytes)
 			file.WriteByte(byte);
 	}
 
-	void CppFile::Duplicate(std::string orig, std::string dupl)
+	void File::Duplicate(std::string orig, std::string dupl)
 	{
 		CopyFile(orig.c_str(), dupl.c_str(), true);
 	}
 
-	std::string CppFile::GetParentDirectory(std::string file)
+	std::string File::GetParentDirectory(std::string file)
 	{
 		int pathDelimiterIndex = String::FindLast(file, '/');
 		if (pathDelimiterIndex > 0) {
@@ -220,7 +220,7 @@ namespace CppUtils
 		return "";
 	}
 
-	std::string CppFile::GetName(std::string fullPath)
+	std::string File::GetName(std::string fullPath)
 	{
 		int pathDelimiterIndex = String::FindLast(fullPath, '/');
 		if (pathDelimiterIndex > 0) {
@@ -230,32 +230,32 @@ namespace CppUtils
 		return fullPath;
 	}
 
-	void CppFile::WriteString(std::string str)
+	void File::WriteString(std::string str)
 	{
 		fprintf(Fp, "%s", str.c_str());
 		fputc(0, Fp);
 	}
 
-	void CppFile::WriteByte(byte b)
+	void File::WriteByte(byte b)
 	{
 		fputc(b, Fp);
 	}
 
-	void CppFile::WriteShort(ushort s)
+	void File::WriteShort(ushort s)
 	{
 		byte bytes[2];
 		Util::ShortToBytes(s, bytes);
 		fwrite(bytes, sizeof(byte), 2, Fp);
 	}
 
-	void CppFile::WriteInt(uint i)
+	void File::WriteInt(uint i)
 	{
 		byte bytes[4];
 		Util::IntToBytes(i, bytes);
 		fwrite(bytes, sizeof(byte), 4, Fp);
 	}
 
-	std::string CppFile::ReadString()
+	std::string File::ReadString()
 	{
 		std::string str = "";
 		while (true) {
@@ -272,7 +272,7 @@ namespace CppUtils
 		return str;
 	}
 
-	byte CppFile::ReadByte()
+	byte File::ReadByte()
 	{
 		if (ValidRead()) {
 			byte ch = DataRead[ReadPtr++];
@@ -281,7 +281,7 @@ namespace CppUtils
 		return 0;
 	}
 
-	uint CppFile::ReadInt()
+	uint File::ReadInt()
 	{
 		byte bytes[4] = { 0 };
 
@@ -297,7 +297,7 @@ namespace CppUtils
 		return Util::BytesToInt(bytes);
 	}
 
-	ushort CppFile::ReadShort()
+	ushort File::ReadShort()
 	{
 		byte bytes[2] = { 0 };
 
@@ -309,7 +309,7 @@ namespace CppUtils
 		return Util::BytesToShort(bytes);
 	}
 
-	bool CppFile::ValidRead()
+	bool File::ValidRead()
 	{
 		return ReadPtr < LengthRead;
 	}
