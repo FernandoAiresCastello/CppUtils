@@ -11,7 +11,7 @@
 
 namespace CppUtils
 {
-	class CPPUTILS_API CppFile
+	class CppFile
 	{
 	public:
 		enum Mode { ReadBinary, WriteBinary };

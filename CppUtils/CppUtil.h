@@ -11,7 +11,7 @@
 
 namespace CppUtils
 {
-	class CPPUTILS_API Util
+	class Util
 	{
 	public:
 		static void Randomize();

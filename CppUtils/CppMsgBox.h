@@ -11,7 +11,7 @@
 
 namespace CppUtils
 {
-	class CPPUTILS_API MsgBox
+	class MsgBox
 	{
 	public:
 		static void Info(std::string message);

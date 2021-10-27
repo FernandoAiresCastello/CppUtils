@@ -6,12 +6,6 @@
 =============================================================================*/
 #pragma once
 
-#ifdef DLLEXPORTS
-	#define CPPUTILS_API __declspec(dllexport)
-#else
-	#define CPPUTILS_API __declspec(dllimport)
-#endif
-
 namespace CppUtils
 {
 	typedef unsigned char byte;

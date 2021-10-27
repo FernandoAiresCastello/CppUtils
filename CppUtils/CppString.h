@@ -11,7 +11,7 @@
 
 namespace CppUtils
 {
-	class CPPUTILS_API String
+	class String
 	{
 	public:
 		// === Format ===
