@@ -78,6 +78,19 @@ namespace CppUtils
 		return sign ? -value : value;
 	}
 
+	int String::ToFloat(std::string str)
+	{
+		int value = 0;
+
+		bool sign = str[0] == '-';
+		if (sign)
+			str = String::Skip(str, 1);
+
+		value = atof(str.c_str());
+
+		return sign ? -value : value;
+	}
+
 	std::string String::IntToHex(int x, bool ucase)
 	{
 		return ucase ? Format("%X", x) : Format("%x", x);
