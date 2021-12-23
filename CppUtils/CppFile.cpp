@@ -10,6 +10,7 @@
 #include "CppFile.h"
 #include "CppString.h"
 #include "CppUtil.h"
+#include "CppMsgBox.h"
 
 namespace CppUtils
 {
@@ -18,10 +19,17 @@ namespace CppUtils
 
 	File::File(std::string path, Mode mode)
 	{
+		if (!File::Exists(path)) {
+			MsgBox::Error("File not found: " + path);
+			return;
+		}
+
 		Fp = fopen(path.c_str(), mode == ReadBinary ? "rb" : "wb");
-		LengthRead = 0;
-		DataRead = mode == ReadBinary ? File::ReadBytes(path, &LengthRead) : NULL;
-		ReadPtr = 0;
+
+		if (mode == ReadBinary) {
+			DataRead = File::ReadBytes(path);
+			LengthRead = DataRead.size();
+		}
 	}
 
 	File::~File()
@@ -121,7 +129,7 @@ namespace CppUtils
 	}
 
 	void File::CreateFolder(std::string path)
-	{
+	{ 
 		CreateDirectory(path.c_str(), NULL);
 	}
 
@@ -132,43 +140,31 @@ namespace CppUtils
 
 	std::string File::ReadText(std::string filename)
 	{
-		int length = 0;
-		std::string text = std::string((const char*)ReadBytes(filename, &length), length);
+		if (!File::Exists(filename)) {
+			MsgBox::Error("File not found: " + filename);
+			return "";
+		}
+
+		std::ifstream in(filename);
+		std::string text((std::istreambuf_iterator<char>(in)),
+			std::istreambuf_iterator<char>());
+
 		return text;
 	}
 
 	std::vector<std::string> File::ReadLines(std::string filename)
 	{
-		std::string file = String::Replace(ReadText(filename), "\r", "");
-		return String::Split(file, '\n', false);
+		auto text = ReadText(filename);
+		return String::Split(text, '\n', false);
 	}
 
-	std::vector<int> File::ReadBytes(std::string filename)
+	std::vector<byte> File::ReadBytes(std::string filename)
 	{
-		std::vector<int> bytes;
-		int length = -1;
-		unsigned char* data = File::ReadBytes(filename, &length);
-		for (int i = 0; i < length; i++) {
-			bytes.push_back(data[i]);
-		}
+		std::ifstream in(filename);
+		std::vector<byte> bytes((std::istreambuf_iterator<char>(in)),
+			std::istreambuf_iterator<char>());
+
 		return bytes;
-	}
-
-	unsigned char* File::ReadBytes(std::string filename, int* length)
-	{
-		std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
-
-		if (ifs.good()) {
-			*length = (int)ifs.tellg();
-			char *data = new char[*length];
-			ifs.seekg(0, std::ios::beg);
-			ifs.read(data, *length);
-			ifs.close();
-			return (unsigned char*)data;
-		}
-
-		*length = -1;
-		return NULL;
 	}
 
 	void File::WriteText(std::string filename, std::string text)

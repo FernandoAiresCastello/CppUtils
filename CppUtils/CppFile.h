@@ -37,8 +37,7 @@ namespace CppUtils
 		static void Delete(std::string path);
 		static std::string ReadText(std::string filename);
 		static std::vector<std::string> ReadLines(std::string filename);
-		static std::vector<int> ReadBytes(std::string filename);
-		static unsigned char* ReadBytes(std::string filename, int* length);
+		static std::vector<byte> ReadBytes(std::string filename);
 		static void WriteText(std::string filename, std::string text);
 		static void WriteLines(std::string filename, std::vector<std::string> lines);
 		static void WriteBytes(std::string filename, std::vector<int>& bytes);
@@ -56,10 +55,10 @@ namespace CppUtils
 		ushort ReadShort();
 
 	private:
-		FILE* Fp;
-		unsigned char* DataRead;
-		int LengthRead;
-		int ReadPtr;
+		FILE* Fp = nullptr;
+		std::vector<byte> DataRead;
+		int LengthRead = 0;
+		int ReadPtr = 0;
 
 		bool ValidRead();
 	};

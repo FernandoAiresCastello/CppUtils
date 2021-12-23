@@ -7,6 +7,8 @@
 #include <cstdarg>
 #include <sstream>
 #include <algorithm>
+#include <functional> 
+#include <locale>
 #include <string>
 #include <cctype>
 #include <bitset>
@@ -16,21 +18,33 @@ namespace CppUtils
 {
 	std::string String::Trim(std::string text)
 	{
-		text.erase(0, text.find_first_not_of(" \t"));
-		text.erase(text.find_last_not_of(" \t") + 1);
+		return TrimLeft(TrimRight(text));
+	}
+
+	std::string String::TrimLeft(std::string text)
+	{
+		text.erase(text.begin(), std::find_if(text.begin(), text.end(),
+			std::not1(std::ptr_fun<int, int>(std::isspace))));
+		return text;
+	}
+
+	std::string String::TrimRight(std::string text)
+	{
+		text.erase(std::find_if(text.rbegin(), text.rend(),
+			std::not1(std::ptr_fun<int, int>(std::isspace))).base(), text.end());
 		return text;
 	}
 
 	std::vector<std::string> String::Split(std::string text, char separator, bool trimTokens)
 	{
-		std::vector<std::string> tokens;
-		std::string token;
-		std::istringstream tokenStream(text);
+		std::stringstream ss(text);
+		std::string item;
+		std::vector<std::string> elems;
 
-		while (std::getline(tokenStream, token, separator))
-			tokens.push_back(trimTokens ? Trim(token) : token);
+		while (std::getline(ss, item, separator))
+			elems.push_back(trimTokens ? Trim(item) : item);
 
-		return tokens;
+		return elems;
 	}
 
 	std::vector<std::string> String::SplitIntoEqualSizedStrings(std::string text, int sizeOfEachString)

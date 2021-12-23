@@ -19,9 +19,11 @@ namespace CppUtils
 
 		// === Trim ===
 		static std::string Trim(std::string text);
+		static std::string TrimLeft(std::string text);
+		static std::string TrimRight(std::string text);
 		
 		// === Split ===
-		static std::vector<std::string> Split(std::string text, char separator, bool trimTokens = true);
+		static std::vector<std::string> Split(std::string text, char separator, bool trimTokens);
 		static std::vector<std::string> SplitIntoEqualSizedStrings(std::string text, int sizeOfEachString);
 		
 		// === String-Number Conversion ===
