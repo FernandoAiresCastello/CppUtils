@@ -24,6 +24,7 @@ namespace CppUtils
 		
 		// === Split ===
 		static std::vector<std::string> Split(std::string text, char separator, bool trimTokens);
+		static std::vector<std::string> Split(std::string text, std::string separator, bool trimTokens);
 		static std::vector<std::string> SplitIntoEqualSizedStrings(std::string text, int sizeOfEachString);
 		
 		// === String-Number Conversion ===

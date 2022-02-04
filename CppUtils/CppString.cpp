@@ -47,6 +47,27 @@ namespace CppUtils
 		return elems;
 	}
 
+	std::vector<std::string> String::Split(std::string text, std::string separator, bool trimTokens)
+	{
+		size_t pos = 0;
+		std::string item;
+		std::vector<std::string> elems;
+		bool finished = false;
+
+		while (!finished) {
+			pos = text.find(separator);
+			item = text.substr(0, pos);
+			elems.push_back(trimTokens ? Trim(item) : item);
+
+			if (pos == std::string::npos)
+				finished = true;
+			else
+				text.erase(0, pos + separator.length());
+		}
+
+		return elems;
+	}
+
 	std::vector<std::string> String::SplitIntoEqualSizedStrings(std::string text, int sizeOfEachString)
 	{
 		std::vector<std::string> tokens;
