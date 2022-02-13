@@ -56,6 +56,7 @@ namespace CppUtils
 		static std::string RemoveAll(std::string text, std::string chars);
 
 		// === Substrings ===
+		static std::string Substring(std::string text, int begin, int end);
 		static std::string GetFirstChars(std::string text, int count);
 		static std::string GetLastChars(std::string text, int count);
 

@@ -214,6 +214,16 @@ namespace CppUtils
 		return !text.empty() && it == text.end();
 	}
 
+	std::string String::Substring(std::string text, int begin, int end)
+	{
+		if (begin < 0)
+			begin = 0;
+		if (begin >= text.length() || end < begin)
+			return "";
+
+		return text.substr(begin, end - begin);
+	}
+
 	std::string String::GetFirstChars(std::string text, int count)
 	{
 		return text.substr(0, count);
