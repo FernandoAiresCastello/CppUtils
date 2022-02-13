@@ -8,9 +8,9 @@ using namespace CppUtils;
 int main() {
 
 	printf("Testing CppUtils...\n\n");
-
-	std::string test = "Hello World!*-*This is*- 2*-*This is 3";
-	auto parts = String::Split(test, "*-*", true);
+	
+	std::string tempPath = File::GetTempFilePath();
+	File::WriteText(tempPath, "Hello World!");
 
 	return 0;
 }

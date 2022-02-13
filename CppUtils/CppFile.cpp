@@ -24,9 +24,9 @@ namespace CppUtils
 			return;
 		}
 
-		Fp = fopen(path.c_str(), mode == ReadBinary ? "rb" : "wb");
+		Fp = fopen(path.c_str(), mode == Mode::ReadBinary ? "rb" : "wb");
 
-		if (mode == ReadBinary) {
+		if (mode == Mode::ReadBinary) {
 			DataRead = File::ReadBytes(path);
 			LengthRead = DataRead.size();
 		}
@@ -135,7 +135,8 @@ namespace CppUtils
 
 	void File::Delete(std::string path)
 	{
-		DeleteFile(path.c_str());
+		if (File::Exists(path))
+			DeleteFile(path.c_str());
 	}
 
 	std::string File::ReadText(std::string filename)
@@ -169,11 +170,13 @@ namespace CppUtils
 
 	void File::WriteText(std::string filename, std::string text)
 	{
+		if (!File::Exists(filename))
+			File::Create(filename);
+
 		std::ofstream ofs(filename);
 
-		if (ofs.good()) {
+		if (ofs.good())
 			ofs.write(text.c_str(), text.length());
-		}
 
 		ofs.flush();
 		ofs.close();
@@ -210,9 +213,9 @@ namespace CppUtils
 	std::string File::GetParentDirectory(std::string file)
 	{
 		int pathDelimiterIndex = String::FindLast(file, '/');
-		if (pathDelimiterIndex > 0) {
+		if (pathDelimiterIndex > 0)
 			return String::GetFirstChars(file, pathDelimiterIndex);
-		}
+		
 		return "";
 	}
 
@@ -224,6 +227,20 @@ namespace CppUtils
 			return name;
 		}
 		return fullPath;
+	}
+
+	std::string File::GetTempDirectory()
+	{
+		char path[MAX_PATH + 20];
+		GetTempPath(sizeof(path), path);
+		return std::string(path);
+	}
+
+	std::string File::GetTempFilePath()
+	{
+		auto tempDir = File::GetTempDirectory();
+		auto tempFile = Util::RandomHex(8);
+		return tempDir + tempFile;
 	}
 
 	void File::WriteString(std::string str)

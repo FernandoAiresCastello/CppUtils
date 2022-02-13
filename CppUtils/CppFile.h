@@ -14,7 +14,7 @@ namespace CppUtils
 	class File
 	{
 	public:
-		enum Mode { ReadBinary, WriteBinary };
+		enum class Mode { ReadBinary, WriteBinary };
 
 		File(std::string path, Mode mode);
 		~File();
@@ -44,6 +44,8 @@ namespace CppUtils
 		static void Duplicate(std::string orig, std::string dupl);
 		static std::string GetParentDirectory(std::string file);
 		static std::string GetName(std::string fullPath);
+		static std::string GetTempDirectory();
+		static std::string GetTempFilePath();
 
 		void WriteString(std::string str);
 		void WriteByte(byte b);
