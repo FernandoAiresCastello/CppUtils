@@ -19,7 +19,7 @@ namespace CppUtils
 
 	File::File(std::string path, Mode mode)
 	{
-		if (!File::Exists(path)) {
+		if (mode == Mode::ReadBinary && !File::Exists(path)) {
 			MsgBox::Error("File not found: " + path);
 			return;
 		}
@@ -141,31 +141,45 @@ namespace CppUtils
 
 	std::string File::ReadText(std::string filename)
 	{
-		if (!File::Exists(filename)) {
-			MsgBox::Error("File not found: " + filename);
-			return "";
-		}
-
-		std::ifstream in(filename);
-		std::string text((std::istreambuf_iterator<char>(in)),
-			std::istreambuf_iterator<char>());
-
-		return text;
+		auto chars = ReadChars(filename);
+		return std::string(chars.begin(), chars.end());
 	}
 
-	std::vector<std::string> File::ReadLines(std::string filename)
+	std::vector<std::string> File::ReadLines(std::string filename, std::string lineDelimiter)
 	{
 		auto text = ReadText(filename);
-		return String::Split(text, '\n', false);
+		return String::Split(text, lineDelimiter, false);
 	}
 
 	std::vector<byte> File::ReadBytes(std::string filename)
 	{
-		std::ifstream in(filename);
-		std::vector<byte> bytes((std::istreambuf_iterator<char>(in)),
-			std::istreambuf_iterator<char>());
+		auto chars = ReadChars(filename);
+		std::vector<byte> bytes;
+		for (auto& ch : chars)
+			bytes.push_back((byte)ch);
 
 		return bytes;
+	}
+
+	std::vector<char> File::ReadChars(std::string filename)
+	{
+		if (!File::Exists(filename)) {
+			MsgBox::Error("File not found: " + filename);
+			return std::vector<char>{};
+		}
+
+		std::ifstream ifs(filename, std::ios::binary | std::ios::ate);
+		std::ifstream::pos_type pos = ifs.tellg();
+
+		if (pos == 0)
+			return std::vector<char>{};
+
+		std::vector<char> result(pos);
+
+		ifs.seekg(0, std::ios::beg);
+		ifs.read(&result[0], pos);
+
+		return result;
 	}
 
 	void File::WriteText(std::string filename, std::string text)

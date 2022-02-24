@@ -36,8 +36,9 @@ namespace CppUtils
 		static void CreateFolder(std::string path);
 		static void Delete(std::string path);
 		static std::string ReadText(std::string filename);
-		static std::vector<std::string> ReadLines(std::string filename);
+		static std::vector<std::string> ReadLines(std::string filename, std::string lineDelimiter);
 		static std::vector<byte> ReadBytes(std::string filename);
+		static std::vector<char> ReadChars(std::string filename);
 		static void WriteText(std::string filename, std::string text);
 		static void WriteLines(std::string filename, std::vector<std::string> lines);
 		static void WriteBytes(std::string filename, std::vector<int>& bytes);
