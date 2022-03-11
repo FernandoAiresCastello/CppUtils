@@ -113,6 +113,11 @@ namespace CppUtils
 		return sign ? -value : value;
 	}
 
+	int String::ToInt(char digitAscii)
+	{
+		return digitAscii - '0';
+	}
+
 	int String::ToFloat(std::string str)
 	{
 		int value = 0;

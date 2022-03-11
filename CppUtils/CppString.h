@@ -29,6 +29,7 @@ namespace CppUtils
 		
 		// === String-Number Conversion ===
 		static int ToInt(std::string str);
+		static int ToInt(char digitAscii);
 		static int ToFloat(std::string str);
 		
 		// === Number-String Conversion ===
