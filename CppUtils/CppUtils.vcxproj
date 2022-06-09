@@ -25,6 +25,7 @@
     </ClInclude>
     <ClInclude Include="CppGlobal.h" />
     <ClInclude Include="CppMsgBox.h" />
+    <ClInclude Include="CppProperties.h" />
     <ClInclude Include="CppString.h" />
     <ClInclude Include="CppUtil.h" />
     <ClInclude Include="CppUtils.h" />
@@ -35,6 +36,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CppMsgBox.cpp" />
+    <ClCompile Include="CppProperties.cpp" />
     <ClCompile Include="CppString.cpp" />
     <ClCompile Include="CppUtil.cpp" />
   </ItemGroup>

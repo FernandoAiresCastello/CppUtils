@@ -11,3 +11,4 @@
 #include "CppMsgBox.h"
 #include "CppString.h"
 #include "CppFile.h"
+#include "CppProperties.h"
