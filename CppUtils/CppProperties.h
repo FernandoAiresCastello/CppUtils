@@ -14,6 +14,8 @@ namespace CppUtils
 	class CppProperties
 	{
 	public:
+		CppProperties& operator=(const CppProperties& other);
+		void Set(std::string name);
 		void Set(std::string name, std::string value);
 		void Set(std::string name, int value);
 		bool Has(std::string name);

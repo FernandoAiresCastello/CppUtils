@@ -3,6 +3,20 @@
 
 namespace CppUtils
 {
+    CppProperties& CppProperties::operator=(const CppProperties& other)
+    {
+        Entries.clear();
+        for (auto& entry : other.Entries) {
+            Entries[entry.first] = entry.second;
+        }
+        return *this;
+    }
+
+    void CppProperties::Set(std::string name)
+    {
+        Entries[name] = "";
+    }
+
     void CppProperties::Set(std::string name, std::string value)
     {
         Entries[name] = value;
