@@ -85,7 +85,9 @@ namespace CppUtils
 		// === Character Casing ===
 		static std::string ToUpper(std::string text);
 		static std::string ToLower(std::string text);
-		
+		static int ToUpper(int ch);
+		static int ToLower(int ch);
+
 		// === Padding ===
 		static std::string PadZero(int number, int digits);
 		

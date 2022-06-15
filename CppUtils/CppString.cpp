@@ -301,6 +301,16 @@ namespace CppUtils
 		return text;
 	}
 
+	int String::ToUpper(int ch)
+	{
+		return toupper(ch);
+	}
+
+	int String::ToLower(int ch)
+	{
+		return tolower(ch);
+	}
+
 	std::string String::RemoveAll(std::string text, std::string chars)
 	{
 		for (unsigned int i = 0; i < chars.length(); i++) {
