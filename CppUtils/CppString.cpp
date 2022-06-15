@@ -209,6 +209,11 @@ namespace CppUtils
 		return !text.empty() && isdigit(text[0]);
 	}
 
+	bool String::StartsWithLetter(std::string text)
+	{
+		return !text.empty() && isalpha(text[0]);
+	}
+
 	bool String::IsNumber(std::string text)
 	{
 		if (StartsWith(text, "-"))
@@ -227,6 +232,16 @@ namespace CppUtils
 			return "";
 
 		return text.substr(begin, end - begin);
+	}
+
+	std::string String::Substring(std::string text, int begin)
+	{
+		if (begin < 0)
+			begin = 0;
+		if (begin >= text.length())
+			return "";
+
+		return text.substr(begin);
 	}
 
 	std::string String::GetFirstChars(std::string text, int count)

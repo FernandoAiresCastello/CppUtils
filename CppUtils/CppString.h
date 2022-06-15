@@ -42,6 +42,7 @@ namespace CppUtils
 		static bool StartsWith(std::string text, char ch);
 		static bool StartsWith(std::string text, std::string prefix);
 		static bool StartsWithNumber(std::string text);
+		static bool StartsWithLetter(std::string text);
 		static bool EndsWith(std::string text, char ch);
 		static bool EndsWith(std::string text, std::string suffix);
 		static bool StartsAndEndsWith(std::string text, char ch);
@@ -58,6 +59,7 @@ namespace CppUtils
 
 		// === Substrings ===
 		static std::string Substring(std::string text, int begin, int end);
+		static std::string Substring(std::string text, int begin);
 		static std::string GetFirstChars(std::string text, int count);
 		static std::string GetLastChars(std::string text, int count);
 
