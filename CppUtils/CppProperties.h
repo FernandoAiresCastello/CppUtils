@@ -14,6 +14,8 @@ namespace CppUtils
 	class CppProperties
 	{
 	public:
+		std::map<std::string, std::string> Entries;
+
 		CppProperties& operator=(const CppProperties& other);
 		void Set(std::string name);
 		void Set(std::string name, std::string value);
@@ -25,8 +27,5 @@ namespace CppUtils
 		int GetNumber(std::string name);
 		void Delete(std::string name);
 		void DeleteAll();
-
-	private:
-		std::map<std::string, std::string> Entries;
 	};
 }
