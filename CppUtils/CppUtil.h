@@ -33,5 +33,7 @@ namespace CppUtils
 		static std::string DateTime();
 		static unsigned WrapAdd(unsigned val, int dx, const unsigned lower, const unsigned upper);
 		static int GetDigitCount(unsigned number);
+		static std::string XorEncrypt(std::string str, char xor_key);
+		static std::string XorDecrypt(std::string str, char xor_key);
 	};
 }

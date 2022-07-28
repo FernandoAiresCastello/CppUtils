@@ -195,4 +195,19 @@ namespace CppUtils
 	{
 		return number > 0 ? (int)log10((double)number) + 1 : 1;
 	}
+
+	std::string Util::XorEncrypt(std::string str, char xor_key)
+	{
+		std::string encrypted = str;
+		
+		for (int i = 0; i < str.length(); i++)
+			encrypted[i] = str[i] ^ xor_key;
+
+		return encrypted;
+	}
+
+	std::string Util::XorDecrypt(std::string str, char xor_key)
+	{
+		return XorEncrypt(str, xor_key);
+	}
 }
