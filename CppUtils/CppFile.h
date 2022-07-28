@@ -45,6 +45,9 @@ namespace CppUtils
 		static void Duplicate(std::string orig, std::string dupl);
 		static std::string GetParentDirectory(std::string file);
 		static std::string GetName(std::string fullPath);
+		static std::string GetCurrentExecutableFilePath();
+		static std::string GetCurrentExecutableFileName(bool removeExtension = false);
+		static std::string RemoveExtension(std::string file);
 		static std::string GetTempDirectory();
 		static std::string GetTempFilePath();
 

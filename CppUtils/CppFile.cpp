@@ -235,12 +235,40 @@ namespace CppUtils
 
 	std::string File::GetName(std::string fullPath)
 	{
-		int pathDelimiterIndex = String::FindLast(fullPath, '/');
-		if (pathDelimiterIndex > 0) {
-			std::string name = String::GetLastChars(fullPath, fullPath.length() - pathDelimiterIndex - 1);
-			return name;
-		}
-		return fullPath;
+		std::string filename;
+		int ix_last_slash = String::FindLast(fullPath, '\\');
+		
+		if (ix_last_slash > 0)
+			filename = String::Skip(fullPath, ix_last_slash + 1);
+		else
+			filename = fullPath;
+
+		return filename;
+	}
+
+	std::string File::GetCurrentExecutableFilePath()
+	{
+		return __argv[0];
+	}
+
+	std::string File::GetCurrentExecutableFileName(bool removeExtension)
+	{
+		std::string exe_file = File::GetName(File::GetCurrentExecutableFilePath());
+		std::string exe_name;
+
+		if (removeExtension)
+			return File::RemoveExtension(exe_file);
+		else
+			return exe_file;
+	}
+
+	std::string File::RemoveExtension(std::string file)
+	{
+		size_t ixLastDot = file.find_last_of(".");
+		if (ixLastDot != std::string::npos)
+			return file.substr(0, ixLastDot);
+		else
+			return file;
 	}
 
 	std::string File::GetTempDirectory()
