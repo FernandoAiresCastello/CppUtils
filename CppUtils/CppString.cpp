@@ -356,14 +356,27 @@ namespace CppUtils
 		return String::Format(fmt.c_str(), number);
 	}
 
-	bool String::Contains(std::string text, char search)
+	bool String::Contains(std::string text, char character)
 	{
-		return text.find(search) != std::string::npos;
+		std::string substring = std::string(1, character);
+		size_t pos = text.find(substring);
+		return pos != std::string::npos;
 	}
 
-	bool String::Contains(std::string text, std::string search)
+	bool String::Contains(std::string text, std::string substring)
 	{
-		return text.find(search) != std::string::npos;
+		size_t pos = text.find(substring);
+		return pos != std::string::npos;
+	}
+
+	size_t String::IndexOf(std::string text, char character, size_t offset)
+	{
+		return text.find(character, offset);
+	}
+
+	size_t String::LastIndexOf(std::string text, char character, size_t offset)
+	{
+		return text.find_last_of(character, offset);
 	}
 
 	std::string String::Join(std::vector<std::string> strings, std::string inBetween)
@@ -398,35 +411,31 @@ namespace CppUtils
 		return str;
 	}
 
-	int String::FindFirst(std::string text, char ch)
+	size_t String::FindFirst(std::string text, char ch, size_t offset)
 	{
-		int index = text.find_first_of(ch);
-		return index != std::string::npos ? index : -1;
+		return text.find_first_of(ch, offset);
 	}
 
-	int String::FindFirst(std::string text, std::string substring)
+	size_t String::FindFirst(std::string text, std::string substring, size_t offset)
 	{
-		int index = text.find_first_of(substring);
-		return index != std::string::npos ? index : -1;
+		return text.find_first_of(substring, offset);
 	}
 
-	int String::FindLast(std::string text, char ch)
+	size_t String::FindLast(std::string text, char ch, size_t offset)
 	{
-		int index = text.find_last_of(ch);
-		return index != std::string::npos ? index : -1;
+		return text.find_last_of(ch, offset);
 	}
 
-	int String::FindLast(std::string text, std::string substring)
+	size_t String::FindLast(std::string text, std::string substring, size_t offset)
 	{
-		int index = text.find_last_of(substring);
-		return index != std::string::npos ? index : -1;
+		return text.find_last_of(substring, offset);
 	}
 
-	std::vector<int> String::FindAll(std::string text, char ch)
+	std::vector<int> String::FindAll(std::string text, char ch, size_t offset)
 	{
 		std::vector<int> indexes;
 
-		for (int i = 0; i < text.length(); i++) {
+		for (int i = offset; i < text.length(); i++) {
 			if (text[i] == ch) {
 				indexes.push_back(i);
 			}

@@ -67,15 +67,17 @@ namespace CppUtils
 		static std::string Replace(std::string text, std::string search, std::string repl);
 		
 		// === Contains ===
-		static bool Contains(std::string text, char search);
-		static bool Contains(std::string text, std::string search);
+		static bool Contains(std::string text, char character);
+		static bool Contains(std::string text, std::string substring);
 
-		// === Find ===
-		static int FindFirst(std::string text, char ch);
-		static int FindFirst(std::string text, std::string substring);
-		static int FindLast(std::string text, char ch);
-		static int FindLast(std::string text, std::string substring);
-		static std::vector<int> FindAll(std::string text, char ch);
+		// === Search ===
+		static size_t IndexOf(std::string text, char character, size_t offset = 0U);
+		static size_t LastIndexOf(std::string text, char character, size_t offset = 0U);
+		static size_t FindFirst(std::string text, char ch, size_t offset = 0U);
+		static size_t FindFirst(std::string text, std::string substring, size_t offset = 0U);
+		static size_t FindLast(std::string text, char ch, size_t offset = 0U);
+		static size_t FindLast(std::string text, std::string substring, size_t offset = 0U);
+		static std::vector<int> FindAll(std::string text, char ch, size_t offset = 0U);
 		
 		// === Concatenation ===
 		static std::string Join(std::vector<std::string> strings, std::string inBetween = "");
