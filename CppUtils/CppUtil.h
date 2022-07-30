@@ -35,5 +35,6 @@ namespace CppUtils
 		static int GetDigitCount(unsigned number);
 		static std::string XorEncrypt(std::string str, char xor_key);
 		static std::string XorDecrypt(std::string str, char xor_key);
+		static std::string FormatNumberOfBytes(uint64_t bytes);
 	};
 }
