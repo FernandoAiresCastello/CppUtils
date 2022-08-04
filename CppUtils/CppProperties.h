@@ -17,6 +17,9 @@ namespace CppUtils
 		std::map<std::string, std::string> Entries;
 
 		CppProperties& operator=(const CppProperties& other);
+		bool operator==(const CppProperties& other);
+		bool operator!=(const CppProperties& other);
+
 		void Set(std::string name);
 		void Set(std::string name, std::string value);
 		void Set(std::string name, int value);

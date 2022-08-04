@@ -12,6 +12,19 @@ namespace CppUtils
         return *this;
     }
 
+    bool CppProperties::operator==(const CppProperties& other)
+    {
+        if (Entries.size() != other.Entries.size())
+            return false;
+
+        return Entries == other.Entries;
+    }
+
+    bool CppProperties::operator!=(const CppProperties& other)
+    {
+        return !operator==(other);
+    }
+
     void CppProperties::Set(std::string name)
     {
         Entries[name] = "";
