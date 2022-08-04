@@ -423,7 +423,7 @@ namespace CppUtils
 
 	size_t String::FindLast(std::string text, char ch, size_t offset)
 	{
-		return text.find_last_of(ch, offset);
+		return text.find_last_of(ch);
 	}
 
 	size_t String::FindLast(std::string text, std::string substring, size_t offset)

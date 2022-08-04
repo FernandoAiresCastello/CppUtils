@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include "CppFile.h"
 #include "CppString.h"
 #include "CppUtil.h"
@@ -65,6 +66,8 @@ namespace CppUtils
 			} while (FindNextFile(hFind, &data));
 			FindClose(hFind);
 		}
+
+		std::sort(files.begin(), files.end());
 
 		return files;
 	}
@@ -226,8 +229,10 @@ namespace CppUtils
 
 	std::string File::GetParentDirectory(std::string file)
 	{
-		int pathDelimiterIndex = String::FindLast(file, '/');
-		if (pathDelimiterIndex > 0)
+		size_t pathDelimiterIndex = String::FindLast(file, '/');
+		if (pathDelimiterIndex == std::string::npos)
+			pathDelimiterIndex = String::FindLast(file, '\\');
+		if (pathDelimiterIndex != std::string::npos)
 			return String::GetFirstChars(file, pathDelimiterIndex);
 		
 		return "";
