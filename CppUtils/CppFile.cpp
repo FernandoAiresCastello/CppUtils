@@ -215,7 +215,7 @@ namespace CppUtils
 		ofs.close();
 	}
 
-	void File::WriteBytes(std::string filename, std::vector<int>& bytes)
+	void File::WriteBytes(std::string filename, std::vector<byte>& bytes)
 	{
 		File file(filename, Mode::WriteBinary);
 		for (auto& byte : bytes)
