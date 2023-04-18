@@ -22,9 +22,8 @@ namespace CppUtils
 		static const std::string CurrentDirectory;
 		static const std::string ParentDirectory;
 
-		static std::vector<std::string> List(std::string directory, std::string pattern,
-			bool showFolders, bool showHidden = false);
-
+		static std::vector<std::string> List(std::string directory, std::string pattern, bool showFolders, bool showHidden);
+		static std::vector<std::string> ListFolders(std::string directory, bool showHidden);
 		static bool IsDirectory(std::string file);
 		static bool IsCurrentDirectory(std::string file);
 		static bool IsParentDirectory(std::string file);
@@ -40,7 +39,7 @@ namespace CppUtils
 		static std::vector<byte> ReadBytes(std::string filename);
 		static std::vector<char> ReadChars(std::string filename);
 		static void WriteText(std::string filename, std::string text);
-		static void WriteLines(std::string filename, std::vector<std::string> lines);
+		static void WriteLines(std::string filename, std::vector<std::string> lines, std::string lineDelimiter);
 		static void WriteBytes(std::string filename, std::vector<byte>& bytes);
 		static void Duplicate(std::string orig, std::string dupl);
 		static std::string GetParentDirectory(std::string file);
