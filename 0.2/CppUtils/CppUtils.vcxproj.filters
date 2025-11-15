@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="t_data.cpp" />
+    <ClCompile Include="t_point.cpp" />
+    <ClCompile Include="t_string.cpp" />
+    <ClCompile Include="t_util.cpp" />
+    <ClCompile Include="t_rect.cpp" />
+    <ClCompile Include="t_color.cpp" />
+    <ClCompile Include="t_record_file.cpp" />
+    <ClCompile Include="t_filesystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="t_data.h" />
+    <ClInclude Include="t_dict.h" />
+    <ClInclude Include="t_list.h" />
+    <ClInclude Include="t_point.h" />
+    <ClInclude Include="t_rect.h" />
+    <ClInclude Include="t_stack.h" />
+    <ClInclude Include="t_string.h" />
+    <ClInclude Include="t_util.h" />
+    <ClInclude Include="t_color.h" />
+    <ClInclude Include="t_record_file.h" />
+    <ClInclude Include="t_filesystem.h" />
+  </ItemGroup>
+</Project>
