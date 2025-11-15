@@ -9,6 +9,7 @@
     <ClCompile Include="t_color.cpp" />
     <ClCompile Include="t_record_file.cpp" />
     <ClCompile Include="t_filesystem.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="t_data.h" />

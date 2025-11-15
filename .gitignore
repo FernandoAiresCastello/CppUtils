@@ -15,3 +15,6 @@ debug
 *.dia~
 Debug
 Docs/Generated
+x86
+x64
+main.cpp
