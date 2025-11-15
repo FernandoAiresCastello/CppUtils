@@ -3,6 +3,12 @@
 #include "t_list.h"
 #include "t_record_file.h"
 
+struct t_filesystem_entry
+{
+	t_string name;
+	bool directory = false;
+};
+
 class t_filesystem
 {
 public:
@@ -13,12 +19,14 @@ public:
 	static bool file_exists(const t_string& filename);
 
 	// Listing
+	static t_list<t_filesystem_entry> list(const t_string& directory);
 	static t_list<t_string> list_files(const t_string& directory, const char* prefix = nullptr);
 	static t_list<t_string> find_files(const t_string& directory, const t_string& namepart);
-	
+	static t_list<t_string> list_directories(const t_string& directory);
+
 	// Write/read hex format
-	static void write_hex_file(const t_string& data, const t_string& filename);
-	static t_string read_hex_file(const t_string& filename);
+	static void write_hex_file(const t_string& data, const t_string& filename, int bytes_per_line);
+	static t_string read_hex_file(const t_string& filename, int bytes_per_line);
 
 	// Write/read plaintext format
 	static t_string read_all_text(const t_string& filename);

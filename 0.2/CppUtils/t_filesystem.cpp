@@ -2,8 +2,6 @@
 #include <filesystem>
 #include "t_filesystem.h"
 
-constexpr int bytes_per_line = 16;
-
 namespace fs = std::filesystem;
 
 t_list<t_string> t_filesystem::illegal_filenames = {
@@ -38,6 +36,24 @@ bool t_filesystem::file_exists(const t_string& filename)
         fs::is_regular_file(fs::path(filename.c_str()));
 }
 
+t_list<t_filesystem_entry> t_filesystem::list(const t_string& directory)
+{
+    t_list<t_filesystem_entry> entries;
+
+    for (const auto& entry : fs::directory_iterator(directory.c_str())) {
+        bool isDir = fs::is_directory(entry.status());
+        bool isFile = fs::is_regular_file(entry.status());
+        if (isDir || isFile) {
+            t_filesystem_entry fs_entry;
+            fs_entry.name = t_string(entry.path().filename().string());
+            fs_entry.directory = isDir;
+            entries.emplace_back(fs_entry);
+        }
+    }
+
+    return entries;
+}
+
 t_list<t_string> t_filesystem::list_files(const t_string& directory, const char* prefix)
 {
     t_list<t_string> files;
@@ -70,13 +86,25 @@ t_list<t_string> t_filesystem::find_files(const t_string& directory, const t_str
     return list_files(directory, namepart.c_str());
 }
 
-void t_filesystem::write_hex_file(const t_string& data, const t_string& filename)
+t_list<t_string> t_filesystem::list_directories(const t_string& directory)
+{
+    t_list<t_string> dirs;
+
+    for (const auto& entry : fs::directory_iterator(directory.c_str())) {
+        if (fs::is_directory(entry.status())) {
+            const auto&& path = entry.path().filename().string();
+            dirs.emplace_back(t_string(path));
+        }
+    }
+
+    return dirs;
+}
+
+void t_filesystem::write_hex_file(const t_string& data, const t_string& filename, int bytes_per_line)
 {
     t_string line;
     t_list<t_string> lines;
     int byte_count = 3;
-
-    line += t_string::fmt("%02X %02X %02X ", 'P', 'T', 'M');
 
     for (const unsigned char& ch : data.s_str()) {
         line += t_string::fmt("%02X", ch);
@@ -97,7 +125,7 @@ void t_filesystem::write_hex_file(const t_string& data, const t_string& filename
     write_all_lines(lines, filename);
 }
 
-t_string t_filesystem::read_hex_file(const t_string& filename)
+t_string t_filesystem::read_hex_file(const t_string& filename, int bytes_per_line)
 {
     t_string text;
     auto&& byte_lines = read_all_lines(filename);
